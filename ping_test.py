@@ -10,7 +10,10 @@ NUM_OF_PINGS = 4
 TIME_BETWEEN_PINGS = 0.1
 LINE_WIDTH = 61
 CENTER_WIDTH = LINE_WIDTH - 4
-
+LEFT_JUSTIFT_NAME = 20
+LEFT_JUSTIFY_STATUS = 9
+LEFT_JUSTIFY_LATENCY = 12
+LEFT_JUSTIFY_IP = 15
 
 def horizontal_line(width):
     """
@@ -108,20 +111,20 @@ def print_output(device_dict, execution_time):
           'Status of Devices'.center(CENTER_WIDTH),
           '|')
     horizontal_line(LINE_WIDTH)
-    print('| Device Name'.ljust(20),
-          '| Status'.ljust(9),
-          '| Latency'.ljust(12),
-          '| IP Address'.ljust(15),
+    print('| Device Name'.ljust(LEFT_JUSTIFT_NAME),
+          '| Status'.ljust(LEFT_JUSTIFY_STATUS),
+          '| Latency'.ljust(LEFT_JUSTIFY_LATENCY),
+          '| IP Address'.ljust(LEFT_JUSTIFY_IP),
           '|')
     horizontal_line(LINE_WIDTH)
     for name, online in device_dict.items():
         if online["status"] == 'Online':
             up_count += 1
-        print(f'| {name}'.ljust(20),
-              f'| {online["status"]}'.ljust(9),
-              f'| {online["latency"]}'.ljust(12),
-              f'| {ipaddr_first3}{online["ip"]}'.ljust(15),
-              f'|')
+            print(f'| {name}'.ljust(LEFT_JUSTIFT_NAME),
+                  f'| {online["status"]}'.ljust(LEFT_JUSTIFY_STATUS),
+                  f'| {online["latency"]}'.ljust(LEFT_JUSTIFY_LATENCY),
+                  f'| {ipaddr_first3}{online["ip"]}'.ljust(LEFT_JUSTIFY_IP),
+                  f'|')
     horizontal_line(LINE_WIDTH)
     print('|',
           f'Execution Time: {execution_time} seconds | Devices Online: {up_count}'.center(CENTER_WIDTH),

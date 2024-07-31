@@ -7,7 +7,8 @@ ipaddr_first3 = device_data.ipaddr_first3
 devices = device_data.devices
 
 NUM_OF_PINGS = 4
-TIME_BETWEEN_PINGS = 0.1
+TIME_BETWEEN_PINGS = .5  # Seconds (Note: 1 second is 1000ms and 0.5 seconds is 500ms)
+
 LINE_WIDTH = 61
 CENTER_WIDTH = LINE_WIDTH - 4
 LEFT_JUSTIFT_NAME = 20
@@ -67,10 +68,10 @@ def check_network(device_dict_object):
     error = e.decode('ascii')
 
     # A return code of 0 mean the command has no errors, a return code > 0 indicates errors were encountered.
-    rtn_code = str(proc.returncode)
+    return_code = str(proc.returncode)
 
     # # Check if the percent loss and the return code are both 0, and the error variable is nothing.
-    if output[percent_loss_start_index:percent_loss_end_index] == '0' and rtn_code == '0' and error == '':
+    if output[percent_loss_start_index:percent_loss_end_index] == '0' and return_code == '0' and error == '':
         device_dict_object['status'] = 'Online'
         device_dict_object['latency'] = device_latency
     else:
@@ -120,11 +121,14 @@ def print_output(device_dict, execution_time):
     for name, online in device_dict.items():
         if online["status"] == 'Online':
             up_count += 1
-            print(f'| {name}'.ljust(LEFT_JUSTIFT_NAME),
-                  f'| {online["status"]}'.ljust(LEFT_JUSTIFY_STATUS),
-                  f'| {online["latency"]}'.ljust(LEFT_JUSTIFY_LATENCY),
-                  f'| {ipaddr_first3}{online["ip"]}'.ljust(LEFT_JUSTIFY_IP),
-                  f'|')
+
+        # When this print statement is outside of the if statement it will display all devices, online of offline,
+        # if it is inside of the if statement, it will only show devices that are online.
+        print(f'| {name}'.ljust(LEFT_JUSTIFT_NAME),
+              f'| {online["status"]}'.ljust(LEFT_JUSTIFY_STATUS),
+              f'| {online["latency"]}'.ljust(LEFT_JUSTIFY_LATENCY),
+              f'| {ipaddr_first3}{online["ip"]}'.ljust(LEFT_JUSTIFY_IP),
+              f'|')
     horizontal_line(LINE_WIDTH)
     print('|',
           f'Execution Time: {execution_time} seconds | Devices Online: {up_count}'.center(CENTER_WIDTH),

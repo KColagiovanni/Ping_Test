@@ -55,7 +55,17 @@ Install Python, after a successful installation, continue to the next step.
   - In the `ping_test.py` file, on line 9, the `TIME_BETWEEN_PINGS` variable can be changed to adjust the time(in seconds) between when each ping is sent. The higher the number is, the longer the time of execution will be. The OS will limit the minimum interval allowed between ping commands, to avoid flooding the network. The minimum interval depends on the OS, user privledges, and the network settings. If this vlue is set too low, all the devices will appear to be offline falsely. The execution tiem between 500ms, 100ms, and 10ms is the dame. The execution time between 1000ms and 500ms is about 3 seconds. Default is 500 ms(0.5 seconds).  
 
 ## Visualizations
-Coming soon
+Checking all devices that are online:
 
-## Credits/Resources
-Coming soon
+![image](https://github.com/user-attachments/assets/d6e6975c-4019-4808-8789-1bbce3e5a510)
+
+Checking all devices that are both online and offline:
+
+![image](https://github.com/user-attachments/assets/5e617e7b-acd8-48e8-88ba-6abc02156e4e)
+
+Checking known defined devices that are both online and offline:
+
+![image](https://github.com/user-attachments/assets/60a78841-6d97-485a-a251-846dc30e26c4)
+
+### Author:
+Kevin Colagiovanni
